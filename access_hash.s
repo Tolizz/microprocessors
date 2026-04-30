@@ -51,26 +51,31 @@ arithmos_el
 	CMP R1, #'9'
 	BGT next_char
 	
+	; is number
 	SUB R7, R1, #'0'
 	LDR R5, =digit_table
 	LDRB R6, [R5,R7]
 	ADD R2, R2, R6
 	B next_char
 	
+	; is uppercase
 megalo_el
 	LSL R7, R1, #1
 	ADD R2, R2, R7
 	B next_char
 	
+	; is lowercase
 pezo_el
 	AND R1, R4
 	ADD R2, R2, R1
 	B next_char
 	
+	; next iteration
 next_char
 	ADDS R3, R3, #1
 	B kefalaio_loop
 	
+	; end of string
 kefalaio_done
 	MOV R0, R2
 	
